@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:prueba_proyecto/ui/pages/adopta_page.dart';
 import 'package:prueba_proyecto/ui/widgets/side_list.dart';
+import 'package:prueba_proyecto/controllers/home_controller.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
+
+  Container horizontalListAdoptar() {
+    return Container(
+      width: 200,
+      margin: const EdgeInsets.symmetric(horizontal: 5),
+      child: Card(
+        child: Wrap(
+          children: [],
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +34,43 @@ class HomePage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
+                padding: const EdgeInsets.symmetric(vertical: 15),
                 height: 400,
                 width: double.infinity,
                 color: Colors.red,
-                child: const Text("Hola yo soy... FOTO ; Adoptame"),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    const Text(
+                      "Hola yo soy...",
+                      style: TextStyle(fontSize: 30),
+                    ),
+                    Expanded(
+                        child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 10),
+                      children: [
+                        horizontalListAdoptar(),
+                        horizontalListAdoptar(),
+                        horizontalListAdoptar(),
+                        horizontalListAdoptar(),
+                        horizontalListAdoptar(),
+                        FloatingActionButton(
+                          onPressed: () => {
+                            // TODO: llevar a la página de adopción
+                          },
+                          child: const Icon(Icons.add),
+                          backgroundColor: Colors.amber,
+                        )
+                      ],
+                    )),
+                    const Text(
+                      "Adóptame!",
+                      style: TextStyle(fontSize: 30),
+                    )
+                  ],
+                ),
               ),
               Container(
                   height: 400,

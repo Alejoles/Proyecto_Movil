@@ -31,7 +31,7 @@ class SideList extends StatelessWidget {
             leading: const Icon(Icons.home),
             title: const Text("Inicio"),
             onTap: () => {
-              Get.offAllNamed("/home"),
+              Get.offNamed("/home"),
               selectedHome = true,
               selectedAdoptar = false,
               selectedPonerAdopcion = false,
@@ -78,7 +78,7 @@ class SideList extends StatelessWidget {
               selectedDonar = true,
             },
             selected: selectedDonar,
-            enabled: true,
+            enabled: false,
           ),
         ],
       ),
