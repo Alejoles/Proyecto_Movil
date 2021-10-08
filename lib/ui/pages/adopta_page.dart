@@ -15,8 +15,19 @@ class AdoptaPage extends StatelessWidget {
         title: const Text('Adopta :)'),
         backgroundColor: Colors.deepPurple,
       ),
-      body: SingleChildScrollView(
-        child: Center(),
+      body: GridView.count(
+        crossAxisCount: 2,
+        mainAxisSpacing: 5,
+        crossAxisSpacing: 5,
+        children: List.generate(20, (index) {
+          return Center(
+            child: Text(
+              'Item $index',
+              style: Theme.of(context).textTheme.headline5,
+            ),
+          );
+        }),
+        // TODO: hacer un footer en el que se pueda cambiar de página
       ),
       drawer: const SideList(),
     );

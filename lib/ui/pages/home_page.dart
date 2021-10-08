@@ -42,7 +42,7 @@ class HomePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     const Text(
-                      "Hola yo soy...",
+                      "Hola! Yo soy...",
                       style: TextStyle(fontSize: 30),
                     ),
                     Expanded(
@@ -84,7 +84,7 @@ class HomePage extends StatelessWidget {
                 child: const Text("Quienes somos? FOTO"),
               ),
               Container(
-                height: 200,
+                height: 100,
                 color: Colors.purple,
                 width: double.infinity,
                 child: const Text("Footer; Contacto..."),
