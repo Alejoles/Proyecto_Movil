@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:prueba_proyecto/bindings/dashboard_binding.dart';
 import 'package:prueba_proyecto/common/constants.dart';
 import 'package:prueba_proyecto/ui/pages/adopta_page.dart';
+import 'package:prueba_proyecto/ui/pages/dashboard.dart';
 import 'package:prueba_proyecto/ui/pages/donar_page.dart';
 import 'package:prueba_proyecto/ui/pages/poner_adopcion_page.dart';
+import 'package:prueba_proyecto/ui/widgets/nav_bar.dart';
 import 'pages/home_page.dart';
 
 class MyApp extends StatelessWidget {
@@ -15,13 +18,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: HOME_ROUTE,
+      initialRoute: "/",
       getPages: [
-        GetPage(name: HOME_ROUTE, page: () => const HomePage()),
-        GetPage(name: ADOPTA_ROUTE, page: () => const AdoptaPage()),
         GetPage(
-            name: PONER_ADOPCION_ROUTE, page: () => const PonerAdopcionPage()),
-        GetPage(name: DONAR_ROUTE, page: () => const DonarPage()),
+            name: "/",
+            page: () => const MyDashBoard(),
+            binding: DashBoardBinding()),
       ],
     );
   }

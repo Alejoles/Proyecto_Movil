@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:prueba_proyecto/ui/widgets/nav_bar.dart';
 import 'package:prueba_proyecto/ui/widgets/side_list.dart';
 
 class PonerAdopcionPage extends StatelessWidget {
@@ -18,7 +19,6 @@ class PonerAdopcionPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Center(),
       ),
-      drawer: const SideList(),
     );
   }
 }

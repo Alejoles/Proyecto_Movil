@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:prueba_proyecto/ui/widgets/nav_bar.dart';
 import 'package:prueba_proyecto/ui/widgets/side_list.dart';
 
 class DonarPage extends StatelessWidget {
@@ -15,10 +16,9 @@ class DonarPage extends StatelessWidget {
         title: const Text('Dónanos'),
         backgroundColor: Colors.deepPurple,
       ),
-      body: SingleChildScrollView(
+      body: const SingleChildScrollView(
         child: Center(),
       ),
-      drawer: const SideList(),
     );
   }
 }

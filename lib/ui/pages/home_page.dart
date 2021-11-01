@@ -1,8 +1,11 @@
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:prueba_proyecto/ui/widgets/nav_bar.dart';
 import 'package:prueba_proyecto/ui/widgets/side_list.dart';
 import 'package:prueba_proyecto/controllers/home_controller.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends GetView<HomeController> {
   const HomePage({Key? key}) : super(key: key);
 
   Container horizontalListAdoptar() {
@@ -58,7 +61,11 @@ class HomePage extends StatelessWidget {
                         horizontalListAdoptar(),
                         FloatingActionButton(
                           onPressed: () => {
-                            // TODO: llevar a la página de adopción
+                            Get.offNamed("/adopta"),
+                            selectedHome = false,
+                            selectedAdoptar = true,
+                            selectedPonerAdopcion = false,
+                            selectedDonar = false,
                           },
                           child: const Icon(Icons.add),
                           backgroundColor: Colors.amber,
@@ -94,7 +101,6 @@ class HomePage extends StatelessWidget {
         ),
       ),
       // -- Se puede hacer una clase drawer para usarla en todas las paginas---
-      drawer: const SideList(),
     );
   }
 }

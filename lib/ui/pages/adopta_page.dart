@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:prueba_proyecto/ui/widgets/nav_bar.dart';
 import 'package:prueba_proyecto/ui/widgets/side_list.dart';
 
 class AdoptaPage extends StatelessWidget {
@@ -29,7 +30,6 @@ class AdoptaPage extends StatelessWidget {
         }),
         // TODO: hacer un footer en el que se pueda cambiar de página
       ),
-      drawer: const SideList(),
     );
   }
 }
