@@ -1,6 +1,10 @@
+import 'dart:developer';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:provider/provider.dart';
 import 'package:get/get.dart';
 import 'package:prueba_proyecto/controllers/authentication_controller.dart';
 
@@ -12,6 +16,9 @@ class MyLoginPage extends StatefulWidget {
 }
 
 class _LoginPage extends State<MyLoginPage> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<AuthenticationController>(builder: (controller) {
@@ -76,11 +83,11 @@ class _LoginPage extends State<MyLoginPage> {
                                 border: Border(
                                     bottom: BorderSide(color: Colors.grey))),
                             child: TextFormField(
-                              decoration: const InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: "Email",
-                                  hintStyle: TextStyle(color: Colors.grey)),
-                            ),
+                                decoration: const InputDecoration(
+                                    border: InputBorder.none,
+                                    hintText: "Email",
+                                    hintStyle: TextStyle(color: Colors.grey)),
+                                controller: emailController),
                           ),
                           Container(
                             padding: const EdgeInsets.all(8),
@@ -92,6 +99,8 @@ class _LoginPage extends State<MyLoginPage> {
                                   border: InputBorder.none,
                                   hintText: "Contraseña",
                                   hintStyle: TextStyle(color: Colors.grey)),
+                              controller: passwordController,
+                              obscureText: true,
                             ),
                           )
                         ],
@@ -99,8 +108,21 @@ class _LoginPage extends State<MyLoginPage> {
                     ),
                     const SizedBox(height: 25),
                     ElevatedButton(
-                      onPressed: () =>
-                          Get.offNamed("/"), //TODO: Realizar el login
+                      onPressed: () async {
+                        await controller.signIn(
+                            email: emailController.text.trim(),
+                            password: passwordController.text.trim());
+                        controller.authStateChanges.listen((User? user) async {
+                          if (user == null) {
+                            print("User signed out");
+                            Get.toNamed("/login");
+                          } else {
+                            var iduser = user.email;
+                            print("User signed in $iduser");
+                            Get.offNamed("/");
+                          }
+                        });
+                      },
                       style: ElevatedButton.styleFrom(
                           primary: const Color.fromRGBO(142, 148, 251, 1),
                           elevation: 5),
@@ -114,8 +136,9 @@ class _LoginPage extends State<MyLoginPage> {
                     ),
                     const SizedBox(height: 5),
                     TextButton(
-                        onPressed: () => controller
-                            .testFirebase(), //TODO: Realizar el registro
+                        onPressed: () => {
+                              controller.signOut()
+                            }, //TODO: Realizar el registro con pop-ups
                         child: Text("No tienes cuenta? Registrate")),
                     const SizedBox(height: 5),
                     Column(
@@ -126,20 +149,20 @@ class _LoginPage extends State<MyLoginPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: <Widget>[
                             IconButton(
-                              iconSize: 30,
+                              iconSize: 40,
                               onPressed: () =>
                                   {}, //TODO: Hacer el OAuth para cada plataforma
-                              icon: const Icon(Icons.ac_unit),
+                              icon: Image.asset("assets/images/google.png"),
                             ),
                             IconButton(
-                              iconSize: 30,
+                              iconSize: 40,
                               onPressed: () => {},
-                              icon: const Icon(Icons.facebook),
+                              icon: Image.asset("assets/images/facebook.png"),
                             ),
                             IconButton(
-                              iconSize: 30,
+                              iconSize: 40,
                               onPressed: () => {},
-                              icon: const Icon(Icons.gradient_rounded),
+                              icon: Image.asset("assets/images/apple.png"),
                             ),
                           ],
                         )
@@ -153,5 +176,21 @@ class _LoginPage extends State<MyLoginPage> {
         ),
       );
     });
+  }
+}
+
+class AuthenticationWrapper extends GetView<AuthenticationController> {
+  const AuthenticationWrapper({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    controller.authStateChanges.listen((User? user) {
+      if (user == null) {
+        print("User signed out");
+      } else {
+        print("Not signed in");
+      }
+    });
+    return Container();
   }
 }

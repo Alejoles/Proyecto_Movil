@@ -1,0 +1,28 @@
+{
+  "name": "",
+  "css_prefix_text": "",
+  "css_use_suffix": false,
+  "hinting": true,
+  "units_per_em": 1000,
+  "ascent": 850,
+  "glyphs": [
+    {
+      "uid": "f06fe7ff18d1c591bc1183cb3ab105e9",
+      "css": "google",
+      "code": 61856,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "c8a620baa7b8ea0db70149cb5da9b6ae",
+      "css": "facebook",
+      "code": 61594,
+      "src": "fontawesome5"
+    },
+    {
+      "uid": "3f735371e15300262895e9c90dbfa3fb",
+      "css": "apple",
+      "code": 61817,
+      "src": "fontawesome5"
+    }
+  ]
+}
