@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:prueba_proyecto/bindings/dashboard_binding.dart';
-import 'package:prueba_proyecto/common/constants.dart';
-import 'package:prueba_proyecto/ui/pages/adopta_page.dart';
+import 'package:prueba_proyecto/bindings/login_binding.dart';
 import 'package:prueba_proyecto/ui/pages/dashboard.dart';
-import 'package:prueba_proyecto/ui/pages/donar_page.dart';
-import 'package:prueba_proyecto/ui/pages/poner_adopcion_page.dart';
-import 'package:prueba_proyecto/ui/widgets/nav_bar.dart';
-import 'pages/home_page.dart';
+import 'pages/login_page.dart';
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -18,8 +16,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: "/",
+      initialRoute: "/login",
       getPages: [
+        GetPage(
+            name: "/login",
+            page: () => const MyLoginPage(),
+            binding: LoginBinding()),
         GetPage(
             name: "/",
             page: () => const MyDashBoard(),

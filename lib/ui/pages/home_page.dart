@@ -23,14 +23,14 @@ class HomePage extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        actions: <Widget>[
-          IconButton(onPressed: () => {}, icon: const Icon(Icons.search))
-        ],
-        centerTitle: true,
-        title: const Text('Huellas a casa Icon'),
-        backgroundColor: Colors.deepPurple,
-      ),
+      // appBar: AppBar(
+      //   actions: <Widget>[
+      //     IconButton(onPressed: () => {}, icon: const Icon(Icons.search))
+      //   ],
+      //   centerTitle: true,
+      //   title: const Text('Huellas a casa Icon'),
+      //   backgroundColor: Colors.deepPurple,
+      // ),
       body: SingleChildScrollView(
         child: Center(
           child: Column(

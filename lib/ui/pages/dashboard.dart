@@ -25,9 +25,9 @@ class _MyDashBoardState extends State<MyDashBoard> {
           child: IndexedStack(
             index: controller.tabIndex,
             children: const [
-              HomePage(),
               AdoptaPage(),
               PonerAdopcionPage(),
+              HomePage(),
               DonarPage(),
               PonerAdopcionPage() //TODO: Página de perfil de usuario.
             ],
@@ -39,9 +39,9 @@ class _MyDashBoardState extends State<MyDashBoard> {
           backgroundColor: Colors.transparent,
           buttonBackgroundColor: Colors.amber, //TODO: Buscar buen color.
           items: const <Widget>[
-            Icon(Icons.home),
             Icon(Icons.catching_pokemon),
             Icon(Icons.pets_sharp),
+            Icon(Icons.home),
             Icon(Icons.card_giftcard),
             Icon(Icons.person)
           ],
