@@ -10,6 +10,7 @@ class DashBoardBinding extends Bindings {
     Get.lazyPut<DashBoardController>(() => DashBoardController());
     Get.lazyPut<HomeController>(() => HomeController());
     Get.lazyPut<AuthenticationController>(
-        () => AuthenticationController(FirebaseAuth.instance));
+        () => AuthenticationController(FirebaseAuth.instance),
+        fenix: true);
   }
 }

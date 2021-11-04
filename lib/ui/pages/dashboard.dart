@@ -6,6 +6,7 @@ import 'package:prueba_proyecto/ui/pages/adopta_page.dart';
 import 'package:prueba_proyecto/ui/pages/donar_page.dart';
 import 'package:prueba_proyecto/ui/pages/home_page.dart';
 import 'package:prueba_proyecto/ui/pages/poner_adopcion_page.dart';
+import 'package:prueba_proyecto/ui/pages/profile_page.dart';
 
 class MyDashBoard extends StatefulWidget {
   const MyDashBoard({Key? key}) : super(key: key);
@@ -21,6 +22,7 @@ class _MyDashBoardState extends State<MyDashBoard> {
   Widget build(BuildContext context) {
     return GetBuilder<DashBoardController>(builder: (controller) {
       return Scaffold(
+        backgroundColor: Colors.blue, //TODO: Buscar buen color.
         body: SafeArea(
           child: IndexedStack(
             index: controller.tabIndex,
@@ -29,7 +31,7 @@ class _MyDashBoardState extends State<MyDashBoard> {
               PonerAdopcionPage(),
               HomePage(),
               DonarPage(),
-              PonerAdopcionPage() //TODO: Página de perfil de usuario.
+              ProfilePage(),
             ],
           ),
         ),
@@ -37,7 +39,7 @@ class _MyDashBoardState extends State<MyDashBoard> {
           height: 55,
           index: controller.tabIndex,
           backgroundColor: Colors.transparent,
-          buttonBackgroundColor: Colors.amber, //TODO: Buscar buen color.
+          buttonBackgroundColor: Colors.orange, //TODO: Buscar buen color.
           items: const <Widget>[
             Icon(Icons.catching_pokemon),
             Icon(Icons.pets_sharp),

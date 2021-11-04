@@ -1,10 +1,7 @@
-import 'dart:developer';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:provider/provider.dart';
 import 'package:get/get.dart';
 import 'package:prueba_proyecto/controllers/authentication_controller.dart';
 
@@ -115,7 +112,7 @@ class _LoginPage extends State<MyLoginPage> {
                         controller.authStateChanges.listen((User? user) async {
                           if (user == null) {
                             print("User signed out");
-                            Get.toNamed("/login");
+                            Get.offNamed("/login");
                           } else {
                             var iduser = user.email;
                             print("User signed in $iduser");
@@ -137,7 +134,7 @@ class _LoginPage extends State<MyLoginPage> {
                     const SizedBox(height: 5),
                     TextButton(
                         onPressed: () => {
-                              controller.signOut()
+                              print(controller.currentUser?.email)
                             }, //TODO: Realizar el registro con pop-ups
                         child: Text("No tienes cuenta? Registrate")),
                     const SizedBox(height: 5),
