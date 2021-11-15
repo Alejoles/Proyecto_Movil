@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:get/get.dart';
 import 'package:prueba_proyecto/controllers/authentication_controller.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class MyLoginPage extends StatefulWidget {
   const MyLoginPage({Key? key}) : super(key: key);
@@ -15,6 +16,8 @@ class MyLoginPage extends StatefulWidget {
 class _LoginPage extends State<MyLoginPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final nameController = TextEditingController();
+  final phoneController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -111,14 +114,16 @@ class _LoginPage extends State<MyLoginPage> {
                             password: passwordController.text.trim());
                         controller.authStateChanges.listen((User? user) async {
                           if (user == null) {
-                            print("User signed out");
                             Get.offNamed("/login");
                           } else {
                             var iduser = user.email;
-                            print("User signed in $iduser");
-                            Get.offNamed("/");
+                            if (user.displayName == null) {
+                              _openPopup(context);
+                            } else {
+                              Get.offNamed("/");
+                            }
                           }
-                        });
+                        }); //TODO: Realizar la asignación de nombre y telefono a la cuenta
                       },
                       style: ElevatedButton.styleFrom(
                           primary: const Color.fromRGBO(142, 148, 251, 1),
@@ -134,9 +139,9 @@ class _LoginPage extends State<MyLoginPage> {
                     const SizedBox(height: 5),
                     TextButton(
                         onPressed: () => {
-                              print(controller.currentUser?.email)
+                              Get.offNamed("/register")
                             }, //TODO: Realizar el registro con pop-ups
-                        child: Text("No tienes cuenta? Registrate")),
+                        child: const Text("No tienes cuenta? Registrate")),
                     const SizedBox(height: 5),
                     Column(
                       children: <Widget>[
@@ -174,8 +179,48 @@ class _LoginPage extends State<MyLoginPage> {
       );
     });
   }
-}
 
+  _openPopup(context) {
+    Alert(
+        context: context,
+        title: "Ultimos pasos",
+        content: Column(
+          children: <Widget>[
+            TextFormField(
+              decoration: const InputDecoration(
+                icon: Icon(Icons.account_circle),
+                labelText: 'Introduzca su nombre',
+              ),
+              controller: nameController,
+            ),
+            TextFormField(
+              obscureText: true,
+              decoration: const InputDecoration(
+                icon: Icon(Icons.phone),
+                labelText: 'Su número de teléfono',
+              ),
+              controller: phoneController,
+            ),
+          ],
+        ),
+        buttons: [
+          DialogButton(
+            onPressed: () => {
+              Navigator.pop(context),
+              FirebaseAuth.instance.currentUser
+                  ?.updateDisplayName(nameController.text),
+              FirebaseAuth.instance.currentUser
+                  ?.linkWithPhoneNumber(phoneController.text)
+            },
+            child: const Text(
+              "GUARDAR",
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
+          )
+        ]).show();
+  }
+}
+/*
 class AuthenticationWrapper extends GetView<AuthenticationController> {
   const AuthenticationWrapper({Key? key}) : super(key: key);
 
@@ -190,4 +235,4 @@ class AuthenticationWrapper extends GetView<AuthenticationController> {
     });
     return Container();
   }
-}
+}*/

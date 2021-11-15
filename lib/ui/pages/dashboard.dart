@@ -1,4 +1,3 @@
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:prueba_proyecto/controllers/dashboard_controller.dart';
@@ -7,6 +6,7 @@ import 'package:prueba_proyecto/ui/pages/donar_page.dart';
 import 'package:prueba_proyecto/ui/pages/home_page.dart';
 import 'package:prueba_proyecto/ui/pages/poner_adopcion_page.dart';
 import 'package:prueba_proyecto/ui/pages/profile_page.dart';
+import 'package:prueba_proyecto/ui/widgets/nav_bar.dart';
 
 class MyDashBoard extends StatefulWidget {
   const MyDashBoard({Key? key}) : super(key: key);
@@ -22,20 +22,56 @@ class _MyDashBoardState extends State<MyDashBoard> {
   Widget build(BuildContext context) {
     return GetBuilder<DashBoardController>(builder: (controller) {
       return Scaffold(
-        backgroundColor: Colors.blue, //TODO: Buscar buen color.
-        body: SafeArea(
-          child: IndexedStack(
-            index: controller.tabIndex,
-            children: const [
-              AdoptaPage(),
-              PonerAdopcionPage(),
-              HomePage(),
-              DonarPage(),
-              ProfilePage(),
-            ],
+          body: Container(
+            child: IndexedStack(
+              index: controller.tabIndex,
+              children: const [
+                AdoptaPage(),
+                PonerAdopcionPage(),
+                HomePage(),
+                DonarPage(),
+                ProfilePage(),
+              ],
+            ),
           ),
-        ),
-        bottomNavigationBar: CurvedNavigationBar(
+          bottomNavigationBar: CustomAnimatedBottomBar(
+              containerHeight: 70,
+              backgroundColor: Colors.white,
+              selectedIndex: controller.tabIndex,
+              showElevation: true,
+              itemCornerRadius: 25,
+              curve: Curves.easeInOut,
+              items: <BottomNavyBarItem>[
+                BottomNavyBarItem(
+                    icon: const Icon(Icons.catching_pokemon),
+                    title: const Text("Adoptar"),
+                    activeColor: Colors.purple,
+                    inactiveColor: Colors.grey),
+                BottomNavyBarItem(
+                  icon: const Icon(Icons.pets),
+                  title: const Text("Adopción"),
+                  activeColor: Colors.brown,
+                  inactiveColor: Colors.grey,
+                ),
+                BottomNavyBarItem(
+                    icon: const Icon(Icons.home),
+                    title: const Text("Home"),
+                    activeColor: Colors.blue,
+                    inactiveColor: Colors.grey),
+                BottomNavyBarItem(
+                    icon: const Icon(Icons.card_giftcard),
+                    title: const Text("Donar"),
+                    activeColor: Colors.pink,
+                    inactiveColor: Colors.grey),
+                BottomNavyBarItem(
+                    icon: const Icon(Icons.person),
+                    title: const Text("Perfil"),
+                    activeColor: Colors.deepOrange,
+                    inactiveColor: Colors.grey),
+              ],
+              onItemSelected: controller.changeTabIndex)
+
+          /*CurvedNavigationBar(
           height: 55,
           index: controller.tabIndex,
           backgroundColor: Colors.transparent,
@@ -48,8 +84,8 @@ class _MyDashBoardState extends State<MyDashBoard> {
             Icon(Icons.person)
           ],
           onTap: controller.changeTabIndex,
-        ),
-      );
+        ),*/
+          );
     });
   }
 }

@@ -1,7 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:get/get.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 class AuthenticationController extends GetxController {
   final FirebaseAuth _fbAuth;
@@ -32,6 +30,7 @@ class AuthenticationController extends GetxController {
     try {
       await _fbAuth.createUserWithEmailAndPassword(
           email: email, password: password);
+
       return "Signed up";
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {

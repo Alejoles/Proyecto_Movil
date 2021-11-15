@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:prueba_proyecto/bindings/dashboard_binding.dart';
 import 'package:prueba_proyecto/ui/pages/dashboard.dart';
+import 'package:prueba_proyecto/ui/pages/register_page.dart';
 import 'pages/login_page.dart';
 
 class MyApp extends StatelessWidget {
@@ -26,11 +27,18 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: FirebaseAuth.instance.currentUser == null ? "/login" : "/",
+      initialRoute: FirebaseAuth.instance.currentUser == null ||
+              FirebaseAuth.instance.currentUser!.displayName == null
+          ? "/login"
+          : "/",
       getPages: [
         GetPage(
             name: "/login",
             page: () => const MyLoginPage(),
+            binding: DashBoardBinding()),
+        GetPage(
+            name: "/register",
+            page: () => const MyRegisterPage(),
             binding: DashBoardBinding()),
         GetPage(
             name: "/",
