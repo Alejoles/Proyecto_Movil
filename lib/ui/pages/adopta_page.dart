@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:prueba_proyecto/ui/widgets/nav_bar.dart';
 
@@ -23,19 +24,27 @@ class AdoptaPage extends StatelessWidget {
                 Colors.purple.shade300
               ])),
           child: GridView.count(
-            crossAxisCount: 2,
-            mainAxisSpacing: 5,
-            crossAxisSpacing: 5,
-            children: List.generate(20, (index) {
-              return Center(
-                child: Text(
-                  'Item $index',
-                  style: Theme.of(context).textTheme.headline5,
-                ),
-              );
-            }),
-            // TODO: hacer un footer en el que se pueda cambiar de página
-          ),
+              crossAxisCount: 2,
+              mainAxisSpacing: 5,
+              crossAxisSpacing: 5,
+              children: [
+                StreamBuilder(
+                  stream:
+                      FirebaseFirestore.instance.collection('pets').snapshots(),
+                  builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                    return ListView(
+                      children: snapshot.data!.docs.map((pets) {
+                        return Center(
+                            child: ListTile(
+                          title: Text(pets['petName']),
+                        ));
+                      }).toList(),
+                    );
+                  },
+                )
+              ]
+              // TODO: hacer un footer en el que se pueda cambiar de página
+              ),
         ));
   }
 }

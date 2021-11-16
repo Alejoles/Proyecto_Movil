@@ -1,20 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:prueba_proyecto/controllers/poner_adopcion_controller.dart';
 import 'package:prueba_proyecto/ui/widgets/nav_bar.dart';
 
-class PonerAdopcionPage extends StatelessWidget {
-  const PonerAdopcionPage({Key? key}) : super(key: key);
-
+class PonerAdopcionPage extends GetView<PonerAdopcionController> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text('Poner en adopción'),
-        backgroundColor: Colors.deepPurple,
-      ),
-      body: SingleChildScrollView(
-        child: Center(),
-      ),
-    );
+    return Center(child: Text("aa"));
   }
 }
