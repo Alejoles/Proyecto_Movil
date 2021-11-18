@@ -64,7 +64,6 @@ class PonerAdopcionPage extends GetView<DatabaseService> {
                           final path = result.files.first.path!;
                           final fileName = result.files.first.name;
                           namefilephotolocal.text = fileName;
-                          print(namefilephotolocal.text);
                           controller.changePhotoName(fileName);
                           controller.uploadFile(path, fileName).then(
                             (value) async {
@@ -87,10 +86,11 @@ class PonerAdopcionPage extends GetView<DatabaseService> {
                               if (snapshot.connectionState ==
                                       ConnectionState.done &&
                                   snapshot.hasData) {
-                                return Image.network(
-                                  snapshot.data!,
-                                  fit: BoxFit.cover,
-                                );
+                                return CircleAvatar(
+                                    radius: 70,
+                                    backgroundImage: NetworkImage(
+                                      snapshot.data!,
+                                    ));
                               }
                               if (snapshot.connectionState ==
                                   ConnectionState.waiting) {
@@ -104,7 +104,7 @@ class PonerAdopcionPage extends GetView<DatabaseService> {
                 )),
           ],
         ),
-        SizedBox(
+        const SizedBox(
           height: 30,
         ),
         Container(
@@ -116,12 +116,12 @@ class PonerAdopcionPage extends GetView<DatabaseService> {
                 fillColor: Colors.grey[200],
                 alignLabelWithHint: true,
                 labelText: "Nombre del Peludo",
-                enabledBorder: OutlineInputBorder(
+                enabledBorder: const OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(30)),
                     borderSide: BorderSide(color: Colors.transparent))),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
         Container(
@@ -211,6 +211,7 @@ class PonerAdopcionPage extends GetView<DatabaseService> {
               imagen.text = "";
               phoneNumber.text = "";
               location.text = "";
+              controller.changePhotoName("");
             },
             child: Text("Poner en adopción"),
           ),

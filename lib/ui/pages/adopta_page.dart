@@ -93,6 +93,7 @@ class AdoptaPage extends GetView<DatabaseService> {
           children: <Widget>[
             CircleAvatar(
               radius: 80,
+              backgroundImage: NetworkImage(listReturned[2]),
             ),
             SizedBox(
               height: 10,
