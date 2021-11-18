@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:prueba_proyecto/controllers/dashboard_controller.dart';
@@ -12,11 +13,31 @@ class HomePage extends GetView<HomeController> {
     return Container(
       width: 200,
       margin: const EdgeInsets.symmetric(horizontal: 5),
-      child: Card(
-        child: Wrap(
-          children: [],
-        ),
-      ),
+      child: Container(
+          decoration: BoxDecoration(
+              boxShadow: [BoxShadow(blurRadius: 10, color: Colors.deepPurple)]),
+          child: Card(
+            child: Column(
+              children: [
+                Image.asset(
+                  'assets/images/perromuestra1.jpg',
+                  fit: BoxFit.fitHeight,
+                  height: 200,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  "Bruno",
+                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Text("Bogotá")
+              ],
+            ),
+          )),
     );
   }
 
@@ -74,7 +95,7 @@ class HomePage extends GetView<HomeController> {
                   ),
                 ),
                 Container(
-                  height: 210,
+                  height: 218,
                   color: Colors.transparent,
                   width: double.infinity,
                   child: Stack(
