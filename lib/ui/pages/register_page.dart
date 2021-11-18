@@ -122,12 +122,31 @@ class _RegisterPage extends State<MyRegisterPage> {
                     ElevatedButton(
                       onPressed: () async {
                         if (passwordController.text ==
-                            passwordController2.text) {
+                                passwordController2.text &&
+                            passwordController.text.length >= 8) {
                           await controller.signUp(
                               email: emailController.text,
                               password: passwordController.text);
+                          emailController.text = "";
+                          passwordController.text = "";
+                          passwordController2.text = "";
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content:
+                                      Text("Cuenta creada, inicia sesión")));
+                          Get.offNamed("/login");
                         } else {
-                          print("Las contraseñas no coinciden");
+                          if (passwordController.text.length < 8) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content: Text(
+                                        "La contraseña debe de tener al menos 8 caracteres")));
+                            return;
+                          }
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content:
+                                      Text("Las contraseñas no coinciden")));
                         }
                       },
                       style: ElevatedButton.styleFrom(
@@ -143,9 +162,9 @@ class _RegisterPage extends State<MyRegisterPage> {
                     ),
                     const SizedBox(height: 5),
                     TextButton(
-                        onPressed: () => {
-                              Get.offNamed("/login")
-                            }, //TODO: Realizar el registro con pop-ups
+                        onPressed: () {
+                          Get.offNamed("/login");
+                        }, //TODO: Realizar el registro con pop-ups
                         child: Text("Ya tienes cuenta? Ingresa acá!")),
                   ],
                 ),

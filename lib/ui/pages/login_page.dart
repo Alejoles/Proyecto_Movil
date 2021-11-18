@@ -18,7 +18,7 @@ class _LoginPage extends State<MyLoginPage> {
   final passwordController = TextEditingController();
   final nameController = TextEditingController();
   final phoneController = TextEditingController();
-
+  static final RegExp nameRegExp = RegExp('[a-zA-Z]');
   @override
   Widget build(BuildContext context) {
     return GetBuilder<AuthenticationController>(builder: (controller) {
@@ -193,24 +193,20 @@ class _LoginPage extends State<MyLoginPage> {
               ),
               controller: nameController,
             ),
-            TextFormField(
-              obscureText: true,
-              decoration: const InputDecoration(
-                icon: Icon(Icons.phone),
-                labelText: 'Su número de teléfono',
-              ),
-              controller: phoneController,
-            ),
           ],
         ),
         buttons: [
           DialogButton(
-            onPressed: () => {
-              Navigator.pop(context),
-              FirebaseAuth.instance.currentUser
-                  ?.updateDisplayName(nameController.text),
-              FirebaseAuth.instance.currentUser
-                  ?.linkWithPhoneNumber(phoneController.text)
+            onPressed: () {
+              if (nameRegExp.hasMatch(nameController.text) &&
+                  nameController.text.length >= 2) {
+                Navigator.pop(context);
+                FirebaseAuth.instance.currentUser
+                    ?.updateDisplayName(nameController.text);
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text("Introduzca un nombre válido")));
+              }
             },
             child: const Text(
               "GUARDAR",

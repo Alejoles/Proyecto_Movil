@@ -47,7 +47,8 @@ class TusPeludosPage extends StatelessWidget {
           documentSnapshot.get('description'),
           documentSnapshot.get('petPicture'),
           documentSnapshot.get('uName'),
-          documentSnapshot.get('phone')
+          documentSnapshot.get('phone'),
+          documentSnapshot.get('location')
         ];
       } else {
         print('Document does not exist on the database');
@@ -56,11 +57,11 @@ class TusPeludosPage extends StatelessWidget {
     await Future.delayed(const Duration(milliseconds: 500), () {});
     Alert(
         context: context,
-        title: "Conoce al peludo",
+        title: "Revisa a tu Peludo",
         content: Column(
           children: <Widget>[
             CircleAvatar(
-              radius: 40,
+              radius: 60,
             ),
             const SizedBox(
               height: 10,
@@ -78,9 +79,11 @@ class TusPeludosPage extends StatelessWidget {
         ),
         buttons: [
           DialogButton(
-            onPressed: () => {
-              document.delete(),
-              Navigator.pop(context),
+            onPressed: () {
+              document.delete();
+              Navigator.pop(context);
+              ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text("Peludo ${listReturned[0]} borrado")));
             },
             child: const Text(
               "Eliminar Peludo",

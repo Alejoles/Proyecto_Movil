@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:prueba_proyecto/services/db_service.dart';
@@ -37,16 +38,26 @@ class AdoptaPage extends GetView<DatabaseService> {
                   mainAxisSpacing: 10,
                   children: snapshot.data!.docs.map((pets) {
                     return Container(
-                      color: Colors.white,
+                      decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          boxShadow: [BoxShadow(blurRadius: 7)],
+                          color: Colors.white),
                       child: GestureDetector(
                         onTap: () async {
                           await _openPopup(context, pets.id);
                         },
                         child: Column(children: [
-                          Image(image: AssetImage("assets/images/perrito.jpg")),
-                          ListTile(
-                            title: Text(pets['petName']),
-                          )
+                          Image.network(
+                            pets['petPicture'],
+                            fit: BoxFit.cover,
+                            height: 110,
+                          ),
+                          Text(
+                            pets['petName'],
+                            style: const TextStyle(
+                                fontSize: 25, fontWeight: FontWeight.bold),
+                          ),
+                          Text(pets['location'])
                         ]),
                       ),
                     );
@@ -66,14 +77,15 @@ class AdoptaPage extends GetView<DatabaseService> {
           documentSnapshot.get('description'),
           documentSnapshot.get('petPicture'),
           documentSnapshot.get('uName'),
-          documentSnapshot.get('phone')
+          documentSnapshot.get('phone'),
+          documentSnapshot.get('location')
         ];
         print(listReturned);
       } else {
         print('Document does not exist on the database');
       }
     });
-    await Future.delayed(const Duration(milliseconds: 500), () {});
+    await Future.delayed(const Duration(milliseconds: 400), () {});
     Alert(
         context: context,
         title: "Conoce al peludo",
