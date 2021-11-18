@@ -26,10 +26,9 @@ class _MyDashBoardState extends State<MyDashBoard> {
             child: IndexedStack(
               index: controller.tabIndex,
               children: [
+                HomePage(),
                 AdoptaPage(),
                 PonerAdopcionPage(),
-                HomePage(),
-                DonarPage(),
                 ProfilePage(),
               ],
             ),
@@ -43,6 +42,11 @@ class _MyDashBoardState extends State<MyDashBoard> {
               curve: Curves.easeInOut,
               items: <BottomNavyBarItem>[
                 BottomNavyBarItem(
+                    icon: const Icon(Icons.home),
+                    title: const Text("Home"),
+                    activeColor: Colors.blue,
+                    inactiveColor: Colors.grey),
+                BottomNavyBarItem(
                     icon: const Icon(Icons.catching_pokemon),
                     title: const Text("Adoptar"),
                     activeColor: Colors.purple,
@@ -54,38 +58,12 @@ class _MyDashBoardState extends State<MyDashBoard> {
                   inactiveColor: Colors.grey,
                 ),
                 BottomNavyBarItem(
-                    icon: const Icon(Icons.home),
-                    title: const Text("Home"),
-                    activeColor: Colors.blue,
-                    inactiveColor: Colors.grey),
-                BottomNavyBarItem(
-                    icon: const Icon(Icons.card_giftcard),
-                    title: const Text("Donar"),
-                    activeColor: Colors.pink,
-                    inactiveColor: Colors.grey),
-                BottomNavyBarItem(
                     icon: const Icon(Icons.person),
                     title: const Text("Perfil"),
                     activeColor: Colors.deepOrange,
                     inactiveColor: Colors.grey),
               ],
-              onItemSelected: controller.changeTabIndex)
-
-          /*CurvedNavigationBar(
-          height: 55,
-          index: controller.tabIndex,
-          backgroundColor: Colors.transparent,
-          buttonBackgroundColor: Colors.orange, //TODO: Buscar buen color.
-          items: const <Widget>[
-            Icon(Icons.catching_pokemon),
-            Icon(Icons.pets_sharp),
-            Icon(Icons.home),
-            Icon(Icons.card_giftcard),
-            Icon(Icons.person)
-          ],
-          onTap: controller.changeTabIndex,
-        ),*/
-          );
+              onItemSelected: controller.changeTabIndex));
     });
   }
 }

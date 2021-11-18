@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:prueba_proyecto/bindings/dashboard_binding.dart';
 import 'package:prueba_proyecto/ui/pages/dashboard.dart';
 import 'package:prueba_proyecto/ui/pages/register_page.dart';
+import 'package:prueba_proyecto/ui/pages/tus_peludos_page.dart';
 import 'pages/login_page.dart';
 
 class MyApp extends StatelessWidget {
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
             name: "/",
             page: () => const MyDashBoard(),
             binding: DashBoardBinding()),
+        GetPage(name: "/tuspeludos", page: () => const TusPeludosPage())
       ],
     );
   }

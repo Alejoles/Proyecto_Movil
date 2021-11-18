@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -64,10 +65,20 @@ class ProfilePage extends GetView<AuthenticationController> {
           ]),
           SizedBox(
             height: 80,
-            child: Text(
-              FirebaseAuth.instance.currentUser!.displayName.toString(),
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-            ),
+            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Text(
+                FirebaseAuth.instance.currentUser!.displayName.toString(),
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+              ),
+              IconButton(
+                onPressed: () => {}, //TODO: cambiar el nombre
+                icon: Image.asset(
+                  "assets/images/pen.png",
+                  height: 20,
+                  width: 20,
+                ),
+              )
+            ]),
           ),
           Container(
               height: 300,
@@ -84,6 +95,27 @@ class ProfilePage extends GetView<AuthenticationController> {
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
+                      Container(
+                        decoration: BoxDecoration(boxShadow: [
+                          BoxShadow(
+                              blurRadius: 10,
+                              spreadRadius: 4,
+                              color: Colors.blue.withOpacity(0.5),
+                              offset: Offset(0, 5))
+                        ]),
+                        child: ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(
+                              fixedSize: Size(150, 50),
+                              shadowColor: Colors.cyan,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10))),
+                          onPressed: () {
+                            Get.toNamed("/tuspeludos");
+                          },
+                          label: const Text("Tus Peludos"),
+                          icon: Icon(Icons.pets_sharp),
+                        ),
+                      ),
                       Container(
                         decoration: BoxDecoration(boxShadow: [
                           BoxShadow(

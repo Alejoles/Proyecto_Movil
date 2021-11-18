@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:prueba_proyecto/controllers/dashboard_controller.dart';
+import 'package:prueba_proyecto/ui/pages/adopta_page.dart';
 import 'package:prueba_proyecto/ui/widgets/nav_bar.dart';
 import 'package:prueba_proyecto/controllers/home_controller.dart';
 
@@ -57,7 +59,7 @@ class HomePage extends GetView<HomeController> {
                           horizontalListAdoptar(),
                           FloatingActionButton(
                             onPressed: () => {
-                              Get.offNamed("/adopta"),
+                              Get.offNamed("/"),
                             },
                             child: const Icon(Icons.add),
                             backgroundColor: Colors.amber,
