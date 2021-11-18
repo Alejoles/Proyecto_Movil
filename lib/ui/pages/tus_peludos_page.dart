@@ -62,6 +62,7 @@ class TusPeludosPage extends StatelessWidget {
           children: <Widget>[
             CircleAvatar(
               radius: 60,
+              backgroundImage: NetworkImage(listReturned[2]),
             ),
             const SizedBox(
               height: 10,

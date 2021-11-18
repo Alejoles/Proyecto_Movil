@@ -7,11 +7,13 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:prueba_proyecto/controllers/authentication_controller.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class ProfilePage extends GetView<AuthenticationController> {
-  const ProfilePage({Key? key}) : super(key: key);
-
   get user => controller.currentUser?.displayName;
+
+  static final RegExp nameRegExp = RegExp('[a-zA-Z]');
+  TextEditingController nameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +73,9 @@ class ProfilePage extends GetView<AuthenticationController> {
                 style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
               ),
               IconButton(
-                onPressed: () => {}, //TODO: cambiar el nombre
+                onPressed: () {
+                  _openPopup(context);
+                },
                 icon: Image.asset(
                   "assets/images/pen.png",
                   height: 20,
@@ -141,5 +145,43 @@ class ProfilePage extends GetView<AuthenticationController> {
                     ]),
               ))
         ]));
+  }
+
+  _openPopup(context) {
+    Alert(
+        context: context,
+        title: "Cambiar de nombre",
+        content: Column(
+          children: <Widget>[
+            TextFormField(
+              decoration: const InputDecoration(
+                icon: Icon(Icons.account_circle),
+                labelText: 'Introduzca su nuevo nombre',
+              ),
+              controller: nameController,
+            ),
+          ],
+        ),
+        buttons: [
+          DialogButton(
+            onPressed: () {
+              if (nameRegExp.hasMatch(nameController.text) &&
+                  nameController.text.length >= 2) {
+                Navigator.pop(context);
+                FirebaseAuth.instance.currentUser
+                    ?.updateDisplayName(nameController.text);
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text("Nombre de usuario cambiado con éxito")));
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text("Introduzca un nombre válido")));
+              }
+            },
+            child: const Text(
+              "Guardar",
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
+          )
+        ]).show();
   }
 }

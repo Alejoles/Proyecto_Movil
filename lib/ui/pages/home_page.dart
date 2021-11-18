@@ -74,23 +74,32 @@ class HomePage extends GetView<HomeController> {
                   ),
                 ),
                 Container(
-                    height: 400,
-                    color: Colors.transparent,
-                    width: double.infinity,
-                    child:
-                        const Text("Mas que un amigo compañero de vida FOTO")),
+                  height: 210,
+                  color: Colors.transparent,
+                  width: double.infinity,
+                  child: Stack(
+                    children: [
+                      Image.asset(
+                        'assets/images/cocker.jpg',
+                        fit: BoxFit.cover,
+                      )
+                    ],
+                  ),
+                ),
                 Container(
                   height: 400,
                   color: Colors.green,
                   width: double.infinity,
-                  child: const Text("Quienes somos? FOTO"),
+                  child: Stack(
+                    children: [
+                      Image.asset(
+                        'assets/images/cat.jpg',
+                        fit: BoxFit.cover,
+                        height: 400,
+                      )
+                    ],
+                  ),
                 ),
-                Container(
-                  height: 100,
-                  color: Colors.purple,
-                  width: double.infinity,
-                  child: const Text("Footer; Contacto..."),
-                )
               ],
             ),
           ),

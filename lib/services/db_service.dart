@@ -57,6 +57,7 @@ class DatabaseService extends GetxController {
     } on FirebaseException catch (e) {
       print(e);
     }
+    update();
   }
 
   Future<String> downloadURL(String imageName) async {
